@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
+import session from 'express-session'
 
 import routes from './routes'
 
@@ -16,6 +17,13 @@ export function start() { // eslint-disable-line import/prefer-default-export
   app.use(express.static(`${ROOT_DIR}/public`))
   app.use(bodyParser.urlencoded({extended: false}))
   app.use(bodyParser.json())
+  app.use(session({
+    key: 'USER_SID',
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 500000000 }
+  }))
 
   app.use(routes)
 

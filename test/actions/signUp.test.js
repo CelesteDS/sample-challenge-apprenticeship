@@ -5,6 +5,9 @@ import { signUp } from '../../src/actions';
 describe('function signUp ', () => {
   it('should create a new row in the users table', () => {
     // TODO: FIXME and write a real test
-    expect(1).to.equal(2)
+    return signUp.createUser('fake name', 'false email', 'made up password')
+      .then((user) => {
+        expect(user.name).to.equal('fake name')
+      })
   })
 })
